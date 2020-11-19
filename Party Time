@@ -1,0 +1,44 @@
+function partyTime(input) {
+    let guestList = {
+        VIP: [],
+        regular: []
+    };
+    let comand = input.shift();
+
+    while (comand !== "PARTY") {
+        let a = comand[0];
+        a = Number(a);
+        if (!isNaN(a)) {
+            guestList.VIP.push(comand);
+        } else {
+            guestList.regular.push(comand);
+        }
+        comand = input.shift();
+    }
+
+    for (const comandElement of input) {
+
+        let b = comandElement[0];
+        b = Number(b);
+        if (!isNaN(b)) {
+            let token = guestList.VIP;
+            let index = token.indexOf(comandElement);
+            token.splice(index, 1);
+        } else {
+            let token = guestList.regular;
+            let index = token.indexOf(comandElement);
+            token.splice(index, 1);
+        }
+    }
+    let values = Object.values(guestList);
+    let numOfGuest = values[0].length + values[1].length;
+    console.log(numOfGuest);
+    for (const name of values) {
+        if (name.length !== 0) {
+            name.forEach(x => {
+                console.log(x);
+            })
+        }
+
+    }
+}
